@@ -3,6 +3,7 @@
 
 CArray<MoveConfigEntry> ConfigManager::arrMoveConfig;
 CArray<DeleteConfigEntry> ConfigManager::arrDeleteConfig;
+CString ConfigManager::strLogFilePath;
 
 void ConfigManager::Initialize() {
 	TCHAR currentDir[MAX_PATH];
@@ -15,6 +16,16 @@ void ConfigManager::Initialize() {
 
 	while (pos < dwRet) {
 		CString str(szBuffer + pos);
+		pos += CString::StringLength(str) + 1;
+
+		if (str.Find(_T("LogFilePath")) != -1) {
+			strLogFilePath = ExtractStringParamater(str, _T("LogFilePath"));
+			continue;
+		}
+ 
+		if (str.Find(_T("Action")) == -1) {
+			continue;
+		}
 
 		CString strAction = ExtractStringParamater(str, _T("Action"));
 		CString strFolderPath = ExtractStringParamater(str, _T("FolderPath"));
@@ -58,8 +69,6 @@ void ConfigManager::Initialize() {
 
 			arrDeleteConfig.Add(cfg);
 		}
-
-		pos += CString::StringLength(str) + 1;
 	}
 }
 

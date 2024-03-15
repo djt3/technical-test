@@ -209,7 +209,7 @@ BOOL CTechnicalTestDlg::OnInitDialog()
 	pInfo->pApp = (CTechnicalTestApp*)AfxGetApp();
 
 	m_nActiveThreads++;
-	m_Logger.SetLogFile(_T("C:\\Temp\\TechnicalTest.log"));
+	m_Logger.SetLogFile(ConfigManager::strLogFilePath);
 
 	AfxBeginThread(CleanUpThread, pInfo, THREAD_PRIORITY_NORMAL, 0);
 

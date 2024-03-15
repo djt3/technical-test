@@ -44,6 +44,7 @@ class ConfigManager {
 public:
 	static void Initialize();
 
+	static CString strLogFilePath;
 	static CArray<MoveConfigEntry> arrMoveConfig;
 	static CArray<DeleteConfigEntry> arrDeleteConfig;
 
